@@ -26,6 +26,26 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
+    if len(my_history)==0: # So the first round is always a c
+        return 'c'
+    else:
+        # Reference last round Definition as variables of whatr to set it to
+        recent_them = their_history[-1]
+        recent_me = my_history[-1]
+                    
+        # Look at rounds before the one about ot be played
+        for round in range(len(my_history)-1):
+            prior_round_them = their_history[round]
+            prior_round_me = my_history[round]
+            # If a letter matches then follow there move
+            if (prior_round_me == recent_me) and \
+                    (prior_round_them == recent_them):
+                return their_history[round]
+        # No match found
+        if my_history[-1]=='c' and their_history[-1]=='b': #makes it so if they did b i will b as a reply
+            return 'b' 
+        else:
+            return 'c' # Otherwise collude isnce they colluded
     return 'c'
 
     
